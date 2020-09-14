@@ -1,9 +1,9 @@
-﻿using System;
+﻿using DoTooApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DoTooApp.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,15 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace DoTooApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainView : ContentPage
+    public partial class ItemView : ContentPage
     {
-        public MainView(MainViewModel viewModel)
+        public ItemView(ItemViewModel viewModel)
         {
             InitializeComponent();
             viewModel.Navigation = Navigation;
             BindingContext = viewModel;
-
-            ItemsListView.ItemSelected += (s, e) => ItemsListView.SelectedItem = null;
         }
     }
 }

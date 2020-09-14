@@ -6,6 +6,23 @@
              mc:Ignorable="d"
              x:Class="DoTooApp.App">
     <Application.Resources>
+        <ResourceDictionary>
 
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#A25EBB"/>
+                <Setter Property="BarBackgroundColor" Value="#ffffff"/>
+            </Style>
+
+            <Style x:Key="FilterButton" TargetType="Button">
+                <Setter Property="Margin" Value="15"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="BorderRadius" Value="6"/>
+                <Setter Property="BorderColor" Value="Silver"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            
+            <Color x:Key="CompletedColor">#1c8859</Color>
+            <Color x:Key="ActiveColor">#d3d3d3</Color>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

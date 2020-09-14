@@ -32,7 +32,7 @@ namespace DoTooApp.Repositories
         {
             await CreateConnection();
             await connection.UpdateAsync(item);
-            OnItemAdded?.Invoke(this, item);
+            OnItemUpdated?.Invoke(this, item);
         }
 
         public async Task DeleteItem(TodoItem item)

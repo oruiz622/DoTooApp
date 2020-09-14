@@ -9,7 +9,7 @@
              Title="Do Too App">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"/>
+        <ToolbarItem Text="Add" Command="{Binding AddItem}"/>
     </ContentPage.ToolbarItems>
 
     <Grid>
@@ -18,9 +18,54 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Text="Toggle Filter"/>
+        <Button Style="{StaticResource FilterButton}"
+                BackgroundColor="{Binding ShowAll}"
+                Text="{Binding FilterText, StringFormat='Filter:{0}'}"
+                Converter="{StaticResource statusColorConverter}"
+                TextColor="Black"
+                Command="{Binding ToggleFilter}"/>
 
-        <ListView Grid.Row="1">
+        <Button.Triggers>
+            <DataTrigger TargetType="Button" Binding="{Binding ShowAll}" Value="True">
+                <Setter Property="TextColor" Value="White"/>
+            </DataTrigger>
+        </Button.Triggers>
+        
+        <ListView x:Name="ItemsListView"
+                  Grid.Row="1"
+                  RowHeight="70"
+                  ItemsSource="{Binding Items}"
+                  SelectedItem="{Binding SelectedItem}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="{Binding StatusText}"
+                                      Command="{Binding ToggleCompleted}"/>
+                        </ViewCell.ContextActions>
+                        <Grid Padding="15, 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <BoxView Grid.RowSpan="1"/>
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding Item.Due, StringFormat='{0:MMMM d, yyyy}'}" 
+                                   FontSize="Micro"/>
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   HorizontalTextAlignment="End"
+                                   Text="Completed"
+                                   IsVisible="{Binding Item.Completed}"
+                                   FontSize="Micro"
+                                   TextColor="{StaticResource CompletedColor}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
             
         </ListView>
     </Grid>
